@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -65,6 +66,18 @@ public class Restaurant {
 
     public String getName() {
         return name;
+    }
+
+    public int getOrderValue(String[] totalOrder) {
+        int total=0;
+        for (String order:totalOrder){
+            for (Item restaurant : menu){
+                if(order.equalsIgnoreCase(restaurant.getName())){
+                    total+=restaurant.getPrice();
+                }
+            }
+        }
+       return total;
     }
 
 }
