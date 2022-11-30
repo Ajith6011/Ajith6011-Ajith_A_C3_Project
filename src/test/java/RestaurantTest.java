@@ -18,12 +18,12 @@ class RestaurantTest {
 
     @Test
     public void is_restaurant_open_should_return_true_if_time_is_between_opening_and_closing_time(){
-        assertTrue(restaurant.isRestaurantOpen(restaurant.getCurrentTime()));
+        assertTrue(restaurant.isRestaurantOpen(LocalTime.parse("8:00:00")));
     }
 
     @Test
     public void is_restaurant_open_should_return_false_if_time_is_outside_opening_and_closing_time(){
-        assertFalse(restaurant.isRestaurantOpen(LocalTime.parse("22:01:00")));
+        assertFalse(restaurant.isRestaurantOpen(restaurant.getCurrentTime()));
     }
 
     @Test
@@ -31,20 +31,21 @@ class RestaurantTest {
 
         int initialMenuSize = restaurant.getMenu().size();
         restaurant.addToMenu("Sizzling brownie",319);
+        restaurant.addToMenu("Sizzling brownie",319);
         assertEquals(initialMenuSize+1,restaurant.getMenu().size());
     }
     @Test
     public void removing_item_from_menu_should_decrease_menu_size_by_1() throws itemNotFoundException {
 
         int initialMenuSize = restaurant.getMenu().size();
-        restaurant.removeFromMenu("Vegetable lasagne");
+        restaurant.removeFromMenu("Vegetable lasagne1");
         assertEquals(initialMenuSize-1,restaurant.getMenu().size());
     }
     @Test
     public void removing_item_that_does_not_exist_should_throw_exception() {
 
         assertThrows(itemNotFoundException.class,
-                ()->restaurant.removeFromMenu("French fries"));
+                ()->restaurant.removeFromMenu("Vegetable lasagne"));
     }
 
 }
